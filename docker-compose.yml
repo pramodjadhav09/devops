@@ -1,7 +1,31 @@
+# version: '3'
+# services:
+#  web:
+#  container_name: nginx-compose
+#  image: nginx
+#  ports:
+#  - "8888:80"
+
+
 version: '3'
 services:
- web:
- container_name: nginx-compose
- image: nginx
+ db:
+ image: mysql:5.7
+ container_name: mysql
  ports:
- - "8888:80"
+ - "3306:3306"
+ env_file:
+ - variables.env
+
+
+
+# version: '3'
+# services:
+#  db:
+#  image: mysql:5.7
+#  container_name: mysql
+#  ports:
+#  - "3306:3306"
+#  environment:
+#  - MYSQL_ROOT_PASSWORD=12345678
+#  - AWS_ACCESS_ID=AWS_ACCESS_ID_VALUE
