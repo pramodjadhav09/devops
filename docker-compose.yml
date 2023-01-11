@@ -1,0 +1,7 @@
+version: '3'
+services:
+ web:
+ container_name: nginx-compose
+ image: nginx
+ ports:
+ - "8888:80"
