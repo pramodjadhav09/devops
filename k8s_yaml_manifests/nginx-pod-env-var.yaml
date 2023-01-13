@@ -1,0 +1,11 @@
+kind: Pod 
+apiVersion: v1 
+metadata:
+  name: nginx-pod-env-var
+spec:
+  containers:
+    - name: nginx-pod-env-var-configmap
+      image: nginx:1.7.9 
+      envFrom:
+        - configMapRef:
+            name: example-configmap
