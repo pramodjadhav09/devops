@@ -1,0 +1,18 @@
+# include_vars -> import variables from a file i.e vars.yml
+
+---
+- name: Install web application packages
+  hosts: dev
+  tasks:
+    - name: Includes the tasks file and defines the variables
+      include_vars: vars.yml
+    - name: Debugs the variables imported
+      debug:
+        msg: "{{ packages['web_package'] }} and {{ packages.db_package }} have been imported"
+    - name: Imports the variables from paths.yml
+      include_vars: paths.yml
+    - name: Creates the remote directory
+      file:
+        path: "{{ paths.fileserver }}"
+        state: directory
+        mode: 0755

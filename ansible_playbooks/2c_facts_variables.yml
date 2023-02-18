@@ -1,0 +1,18 @@
+# Gather Facts runs setup module and generates below mentioned variables to be acessible by any task.
+# To access variables from facts, you have to run the setup module.
+---
+- name: Display Facts Variables inside Play
+  hosts: web
+
+  tasks:
+    - name: display ipv4 address
+      debug:
+        msg: "IPv4 address is {{ ansible_facts.default_ipv4.address }}"
+
+    - name: display fqdn
+      debug:
+        msg: "FQDN is {{ ansible_facts.fqdn }}"
+
+    - name: display OS Distribution
+      debug:
+        msg: "OS Distribution is {{ ansible_facts.distribution }}"

@@ -1,0 +1,33 @@
+# uri : Interacts with webservices
+
+---
+- name: Play To Install Packages and Start Daemon
+  hosts: dev
+  tasks:
+    - name: install packages using yum in play 1
+      yum:
+        name:
+        - firewalld
+        - httpd
+        state: latest
+      notify:
+        - start-httpd
+    - name: Adding content in index.html
+      copy:
+        content: "This content is written from ansible playbook"
+        dest: /var/www/html/index.html
+
+  handlers:
+    - name: start-httpd
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+- name: Play To Test the Webserver
+  hosts: myhost
+  tasks:
+    - name: Try connecting to the httpd server
+      uri:
+        url: http://managed-node-01.example.com
+        status_code: 200

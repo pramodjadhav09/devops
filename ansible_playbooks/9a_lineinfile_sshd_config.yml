@@ -1,0 +1,21 @@
+---
+- name: Playbook for lineinfile module
+  # Execute this play on all hosts mentioned in inventory file.
+  hosts: dev
+  tasks:
+    - name: Update SSH configuration to be more secure.
+      with_items:
+        - regexp: "^PasswordAuthentication"
+          line: "PasswordAuthentication yes"
+        - regexp: "^PermitRootLogin"
+          line: "PermitRootLogin no"
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      notify:
+        - start-sshd-notify
+  handlers:
+    - name: start-sshd-notify
+      service: name=sshd state=restarted

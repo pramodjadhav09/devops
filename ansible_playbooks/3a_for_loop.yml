@@ -1,0 +1,17 @@
+# Traversing a List using with_items and item variables to make use of for loop scenario
+---
+- name: Simple For loop example
+  hosts: myhost
+  tasks:
+    - name: This is For loop Task
+      with_items: [AWS, DEVOPS, Linux]
+      debug:
+        msg: "My name is {{ item }}"
+
+    - name: This is For loop Task-2
+      with_items:
+        - AWS
+        - DEVOPS
+        - Linux
+      debug:
+        msg: "My name is {{ item }}"

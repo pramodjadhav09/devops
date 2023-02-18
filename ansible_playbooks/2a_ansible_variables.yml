@@ -1,0 +1,30 @@
+## magic variables : You can easily assign a variable to a single host, then use it later in playbooks
+## https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+
+## host variables : You can easily assign a variable to a single host, then use it later in playbooks
+## group variables : If all hosts in a group share a variable value, you can apply that variable to an entire group at once
+### Playbook execution commands as below
+# ansible-playbook 2a_ansible_variables.yml
+# ansible-playbook 2a_ansible_variables.yml --extra-vars "user=commandline-user"
+---
+- name: Use Inventory Variables
+  hosts: localhost
+  vars:
+    - user: play-user
+  tasks:
+    - name: Access Play Variables
+      debug:
+        # play-user
+        msg: "The user variable value is {{ user }}"
+    - name: Access Task Variables
+      vars:
+        - user: task-user
+      debug:
+        # task-user
+        msg: "The user variable value is {{ user }}"
+    - name: Using variables from inventory file
+      debug:
+        msg: "This user variable : {{ username }} and password variable : {{ password }} is coming from inventory file"
+    - name: Display hostname magic variable
+      debug:
+        msg: "{{ inventory_hostname }} {{ inventory_file }}"

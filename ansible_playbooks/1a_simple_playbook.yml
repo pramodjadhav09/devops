@@ -1,0 +1,22 @@
+# --- represents this file as a playbook
+# # Execute the playbook with command i.e ansible-playbook 1a_simple_playbook.yml
+# debug : prints the string passed in the msg attribute.
+# A gather facts task will run by default ( uses setup module )
+---
+- name: This is Simple Play inside a Playbook
+  # Execute this play on all hosts mentioned in inventory file.
+  hosts:  all
+  # List of tasks to be executed
+  tasks:
+    - name: This is Debug tasks 1
+      debug:
+        msg: "Hello from task 1"
+    - name: This is Debug tasks 2
+      debug:
+        msg: "Hello from task 2"
+    - name: This is Debug tasks 3
+      debug:
+        msg: "Hello from task 3"
+    - name: This is Debug tasks 4
+      debug:
+        msg: "Hello from task 4"
